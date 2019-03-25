@@ -390,10 +390,10 @@ let fhirServerConfig = {
 		// 	service: './src/services/nutritionorder/nutritionorder.service.js',
 		// 	versions: [ VERSIONS['3_0_1'] ]
 		// },
-		// [RESOURCES.OBSERVATION]: {
-		// 	service: './src/services/observation/observation.service.js',
-		// 	versions: [ VERSIONS['3_0_1'] ]
-		// },
+		[RESOURCES.OBSERVATION]: {
+			service: './src/services/observation/observation.service.js',
+			versions: [ VERSIONS['3_0_1'] ]
+		},
 		// [RESOURCES.OPERATIONDEFINITION]: {
 		// 	service: './src/services/operationdefinition/operationdefinition.service.js',
 		// 	versions: [ VERSIONS['3_0_1'] ]

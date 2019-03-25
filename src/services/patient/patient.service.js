@@ -410,7 +410,7 @@ let buildDstu2SearchQuery = (args) =>	 {
  */
 module.exports.search = (args, context, logger) => new Promise((resolve, reject) => {
 	logger.info('Patient >>> search');
-
+	logger.info(args);
 	let { base_version } = args;
 	let query = {};
 
@@ -466,7 +466,8 @@ module.exports.searchById = (args, context, logger) => new Promise((resolve, rej
 
 module.exports.create = (args, context, logger) => new Promise((resolve, reject) => {
 	logger.info('Patient >>> create');
-
+	logger.info(args);
+	logger.info(context);
 	let { base_version, resource } = args;
 	let id = resource.id;
 
@@ -519,7 +520,8 @@ module.exports.create = (args, context, logger) => new Promise((resolve, reject)
 
 module.exports.update = (args, context, logger) => new Promise((resolve, reject) => {
 	logger.info('Patient >>> update');
-
+	logger.info(args);
+	logger.info(context);
 	let { base_version, id, resource } = args;
 	logger.error(context);
 
