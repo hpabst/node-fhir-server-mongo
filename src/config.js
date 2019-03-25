@@ -158,10 +158,10 @@ let fhirServerConfig = {
 		// 	service: './src/services/claimresponse/claimresponse.service.js',
 		// 	versions: [ VERSIONS['3_0_1'] ]
 		// },
-		// [RESOURCES.CLINICALIMPRESSION]: {
-		// 	service: './src/services/clinicalimpression/clinicalimpression.service.js',
-		// 	versions: [ VERSIONS['3_0_1'] ]
-		// },
+		 [RESOURCES.CLINICALIMPRESSION]: {
+		 	service: './src/services/clinicalimpression/clinicalimpression.service.js',
+		 	versions: [ VERSIONS['3_0_1'] ]
+		 },
 		// [RESOURCES.CODESYSTEM]: {
 		// 	service: './src/services/codesystem/codesystem.service.js',
 		// 	versions: [ VERSIONS['3_0_1'] ]
@@ -414,10 +414,10 @@ let fhirServerConfig = {
 		// 	service: './src/services/plandefinition/plandefinition.service.js',
 		// 	versions: [ VERSIONS['3_0_1'] ]
 		// },
-		// [RESOURCES.PRACTITIONER]: {
-		// 	service: './src/services/practitioner/practitioner.service.js',
-		// 	versions: [ VERSIONS['3_0_1'] ]
-		// },
+		 [RESOURCES.PRACTITIONER]: {
+		 	service: './src/services/practitioner/practitioner.service.js',
+		 	versions: [ VERSIONS['3_0_1'] ]
+		 },
 		// [RESOURCES.PRACTITIONERROLE]: {
 		// 	service: './src/services/practitionerrole/practitionerrole.service.js',
 		// 	versions: [ VERSIONS['3_0_1'] ]
