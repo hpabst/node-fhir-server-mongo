@@ -3,6 +3,10 @@
 const { RESOURCES } = require('@asymmetrik/node-fhir-server-core').constants;
 const FHIRServer = require('@asymmetrik/node-fhir-server-core');
 const { ObjectID } = require('mongodb');
+const moment = require('moment-timezone');
+const { getUuid } = require('../../utils/uid.util');
+const { COLLECTION, CLIENT_DB } = require('../../constants');
+const globals = require('../../globals');
 
 let getPractitioner = (base_version) => {
 	return require(FHIRServer.resolveFromVersion(base_version, RESOURCES.PRACTITIONER));};
@@ -83,13 +87,44 @@ module.exports.create = (args, context, logger) => new Promise((resolve, reject)
 
 	let Practitioner = getPractitioner(base_version);
 	let Meta = getMeta(base_version);
-
+    
 	// TODO: determine if client/server sets ID
 
 	// Cast resource to Practitioner Class
 	let practitioner_resource = new Practitioner(resource);
-	practitioner_resource.meta = new Meta();
+	practitioner_resource.meta = new Meta({versionId: '1', lastUpdated: moment.utc().format('YYYY-MM-DDTHH:mm:ssZ')});
 	// TODO: set meta info
+    
+    id = resource.id;
+	if (id === undefined) {
+		id = getUuid(practitioner_resource);
+	}
+
+	let db = globals.get(CLIENT_DB);
+	let collection = db.collection(`${COLLECTION.PRACTITIONER}_${base_version}`);
+	let doc = JSON.parse(JSON.stringify(practitioner_resource.toJSON()));
+	Object.assign(doc, {id: id});
+	let history_doc = Object.assign({}, doc);
+	Object.assign(doc, {_id: id});
+	// Insert our observation record:
+	collection.insertOne(doc, (err) => {
+		if (err) {
+			logger.error('Error with Practitioner.create: ', err);
+			return reject(err);
+		}
+
+		//Save the resource to history
+		let history_collection = db.collection(`${COLLECTION.PRACTITIONER}_${base_version}_History`);
+
+		//Insert our observation record to history but don't assign _id.
+		return history_collection.insertOne(history_doc, (err2) => {
+			if (err2) {
+				logger.error('Error with ObservationHisotry.create', err2);
+				return reject(err2);
+			}
+			return resolve({id: doc.id, resource_version: doc.meta.versionId});
+		});
+	});
 
 	// TODO: save record to database
 
