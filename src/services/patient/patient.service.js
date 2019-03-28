@@ -564,6 +564,9 @@ module.exports.update = (args, context, logger) => new Promise((resolve, reject)
 			let history_collection = db.collection(`${COLLECTION.PATIENT}_${base_version}_History`);
 
 			let history_patient = Object.assign(cleaned, { id: id });
+			const _id = id = getUuid(patient);
+
+			history_patient._id = _id;
 
 			// Insert our patient record to history but don't assign _id
 			return history_collection.insertOne(history_patient, (err3) => {
