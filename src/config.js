@@ -114,10 +114,10 @@ let fhirServerConfig = {
 		// 	service: './src/services/appointmentresponse/appointmentresponse.service.js',
 		// 	versions: [ VERSIONS['3_0_1'] ]
 		// },
-		// [RESOURCES.AUDITEVENT]: {
-		// 	service: './src/services/auditevent/auditevent.service.js',
-		// 	versions: [ VERSIONS['3_0_1'] ]
-		// },
+		 [RESOURCES.AUDITEVENT]: {
+		 	service: './src/services/auditevent/auditevent.service.js',
+		 	versions: [ VERSIONS['3_0_1'] ]
+		 },
 		// [RESOURCES.BASIC]: {
 		// 	service: './src/services/basic/basic.service.js',
 		// 	versions: [ VERSIONS['3_0_1'] ]

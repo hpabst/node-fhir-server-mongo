@@ -88,11 +88,12 @@ module.exports.create = (args, context, logger) => new Promise((resolve, reject)
 
 	// Cast resource to ClinicalImpression Class
 	let clinicalimpression_resource = new ClinicalImpression(resource);
+    clinicalimpression_resource.id = id;
+    clinicalimpression_resource.identifier[0].value = id;
 	clinicalimpression_resource.meta = new Meta({versionId: '1', lastUpdated: moment.utc().format('YYYY-MM-DDTHH:mm:ssZ')});
 	// TODO: set meta info
 
 	// TODO: save record to database
-    id = resource.id;
 	if (id === undefined) {
 		id = getUuid(clinicalimpression_resource);
 	}
